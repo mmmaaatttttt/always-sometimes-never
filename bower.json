@@ -22,6 +22,7 @@
     "jquery": "^2.2.0",
     "animate.css": "^3.5.1",
     "bootstrap": "^3.3.6",
+    "bootswatch-dist": "lumen",
     "font-awesome": "fontawesome#^4.5.0"
   }
 }
