@@ -2,6 +2,11 @@
   
   'use strict';
 
+  require('angular');
+  require('angular-route');
+  require('angular-animate');
+  var mainCtrl = require('./controllers/mainctrl');
+
   angular.module('ASNApp', ['ngRoute', 'ngAnimate'])
     .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
@@ -13,11 +18,8 @@
         .otherwise({
           redirectTo: '/'
         });
-    }]);
+    }])
 
-  angular.module('ASNApp')
-    .controller('MainController', ['$scope', function($scope) {
-      $scope.test = 'Testing...';
-    }]);
+    .controller('MainController', ['$scope', mainCtrl]);
 
 })();
