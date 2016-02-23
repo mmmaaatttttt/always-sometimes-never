@@ -8,16 +8,29 @@ var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-cssnano');
 var clean = require('gulp-rimraf');
 var runSequence = require('run-sequence');
+var browserify = require('gulp-browserify');
+var concat = require('gulp-concat');
 
 // tasks
+gulp.task('browserify', function() {
+  gulp.src(['app/js/main.js'])
+  .pipe(browserify({
+    insertGlobals: true,
+    debug: true
+  }))
+  .pipe(concat('bundled.js'))
+  .pipe(gulp.dest('./app/js'));
+});
 gulp.task('lint', function() {
-  gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
+  gulp.src(['./app/**/*.js', '!./app/bower_components/**', '!./app/js/bundled.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
 });
 gulp.task('clean', function() {
     gulp.src('./dist/*')
+      .pipe(clean({force: true}));
+    gulp.src('./app/js/bundled.js')
       .pipe(clean({force: true}));
 });
 gulp.task('minify-css', function() {
@@ -57,7 +70,7 @@ gulp.task('connectDist', function () {
 
 // default task
 gulp.task('default',
-  ['lint', 'connect']
+  ['lint', 'browserify', 'connect']
 );
 gulp.task('build', function() {
   runSequence(
