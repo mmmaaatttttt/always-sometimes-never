@@ -10,6 +10,7 @@ var clean = require('gulp-rimraf');
 var runSequence = require('run-sequence');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
+var nodemon = require('gulp-nodemon');
 
 // tasks
 gulp.task('browserify', function() {
@@ -55,10 +56,17 @@ gulp.task('copy-html-files', function () {
   gulp.src('./app/**/*.html')
     .pipe(gulp.dest('dist/'));
 });
-gulp.task('connect', function () {
-  connect.server({
-    root: 'app/',
-    port: 3000
+// gulp.task('connect', function () {
+//   connect.server({
+//     root: 'app/',
+//     port: 3000
+//   });
+// });
+gulp.task('serve', function() {
+  nodemon({
+    script: 'server/app.js',
+    ext: 'js html',
+    env: { 'NODE_ENV': 'development' }
   });
 });
 gulp.task('connectDist', function () {
@@ -79,7 +87,7 @@ gulp.task('browserifyDist', function() {
 
 // default task
 gulp.task('default',
-  ['lint', 'browserify', 'connect']
+  ['lint', 'browserify', 'serve']
 );
 gulp.task('build', function() {
   runSequence(
