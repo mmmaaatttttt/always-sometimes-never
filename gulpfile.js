@@ -58,7 +58,7 @@ gulp.task('copy-html-files', function () {
 gulp.task('connect', function () {
   connect.server({
     root: 'app/',
-    port: 8888
+    port: 3000
   });
 });
 gulp.task('connectDist', function () {

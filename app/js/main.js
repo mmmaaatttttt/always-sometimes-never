@@ -1,11 +1,12 @@
 (function() {
-  
+
   'use strict';
 
+  // console.log("sup");
   require('angular');
   require('angular-route');
   require('angular-animate');
-  // require('satellizer');
+  require('satellizer');
   var mainCtrl = require('./controllers/mainctrl');
   var loginCtrl = require('./controllers/loginCtrl');
 
@@ -14,7 +15,7 @@
     .config([
       '$locationProvider', 
       '$routeProvider', 
-      'satellizer',
+      '$authProvider',
       function($locationProvider, $routeProvider, $authProvider) {
 
         $authProvider.facebook({
