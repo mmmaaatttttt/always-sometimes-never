@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var db = require('./db');
 
 var app = module.exports.app = exports.app = express();
 app.use('/css',express.static(path.join(__dirname, '../app/css')));
