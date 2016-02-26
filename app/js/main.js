@@ -26,8 +26,12 @@
           clientId: 'Google Client ID'
         });
 
-        $locationProvider.hashPrefix('!');
+        // $locationProvider.hashPrefix('!');
         $routeProvider
+          .when('/auth/signup', {
+            templateUrl: './partials/signup.html',
+            controller: 'LoginController'
+          })
           .when('/', {
             templateUrl: './partials/partial1.html',
             controller: 'MainController'
@@ -35,6 +39,7 @@
           .otherwise({
             redirectTo: '/'
           });
+        $locationProvider.html5Mode(true);  
       }
     ])
 
