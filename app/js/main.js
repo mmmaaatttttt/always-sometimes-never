@@ -26,7 +26,6 @@
           clientId: 'Google Client ID'
         });
 
-        // $locationProvider.hashPrefix('!');
         $routeProvider
           .when('/auth/signup', {
             templateUrl: './partials/signup.html',
