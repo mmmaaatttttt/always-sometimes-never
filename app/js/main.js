@@ -10,22 +10,12 @@
   var mainCtrl = require('./controllers/mainctrl');
   var loginCtrl = require('./controllers/loginCtrl');
 
-  angular.module('ASNApp', ['ngRoute', 'ngAnimate', 'satellizer'])
+  angular.module('ASNApp', ['ngRoute', 'ngAnimate'])
     
     .config([
       '$locationProvider', 
       '$routeProvider', 
-      '$authProvider',
-      function($locationProvider, $routeProvider, $authProvider) {
-
-        $authProvider.facebook({
-          clientId: 'Facebook App ID'
-        });
-
-        $authProvider.google({
-          clientId: 'Google Client ID'
-        });
-
+      function($locationProvider, $routeProvider) {
         $routeProvider
           .when('/auth/signup', {
             templateUrl: './partials/signup.html',
@@ -42,7 +32,6 @@
       }
     ])
 
-    .controller('MainController', ['$scope', mainCtrl])
-    .controller('LoginController', ['$scope', '$auth', loginCtrl]);
+    .controller('MainController', ['$scope', mainCtrl]);
 
 })();
