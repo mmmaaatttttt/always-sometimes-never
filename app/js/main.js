@@ -7,6 +7,7 @@
   require('angular-route');
   require('angular-animate');
   var mainCtrl = require('./controllers/mainctrl');
+  var signupCtrl = require('./controllers/signupctrl');
 
   angular.module('ASNApp', ['ngRoute', 'ngAnimate'])
     
@@ -15,8 +16,9 @@
       '$routeProvider', 
       function($locationProvider, $routeProvider) {
         $routeProvider
-          .when('/auth/signup', {
-            templateUrl: './partials/signup.html'
+          .when('/signup', {
+            templateUrl: './partials/signup.html',
+            controller: 'SignupController'
           })
           .when('/', {
             templateUrl: './partials/partial1.html',
@@ -29,6 +31,7 @@
       }
     ])
 
-    .controller('MainController', ['$scope', mainCtrl]);
+    .controller('MainController', ['$scope', mainCtrl])
+    .controller('SignupController', ['$scope', signupCtrl]);
 
 })();

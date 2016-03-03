@@ -66,7 +66,8 @@ gulp.task('serve', function() {
   nodemon({
     script: 'server/app.js',
     ext: 'js html',
-    env: { 'NODE_ENV': 'development' }
+    env: { 'NODE_ENV': 'development' },
+    tasks: ['browserify']
   });
 });
 gulp.task('connectDist', function () {
