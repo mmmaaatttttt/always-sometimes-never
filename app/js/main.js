@@ -8,6 +8,7 @@
   require('angular-animate');
   var mainCtrl = require('./controllers/mainctrl');
   var signupCtrl = require('./controllers/signupctrl');
+  var authService = require('./services/authservice');
 
   angular.module('ASNApp', ['ngRoute', 'ngAnimate'])
     
@@ -27,11 +28,12 @@
           .otherwise({
             redirectTo: '/'
           });
-        $locationProvider.html5Mode(true);  
+        $locationProvider.html5Mode(true);
       }
     ])
 
     .controller('MainController', ['$scope', mainCtrl])
-    .controller('SignupController', ['$scope', signupCtrl]);
+    .controller('SignupController', ['$scope', 'AuthService', signupCtrl])
+    .service('AuthService', ['$http', authService]);
 
 })();

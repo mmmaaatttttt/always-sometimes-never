@@ -3,9 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 
 router.get('/twitter', 
-  passport.authenticate('twitter', {state: 'SOME STATE'}),
-  function(req, res) {
-});
+  passport.authenticate('twitter', {state: 'SOME STATE'}));
 
 router.get('/twitter/callback', passport.authenticate('twitter', {
   successRedirect: '/',

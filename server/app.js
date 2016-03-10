@@ -3,6 +3,8 @@ var path = require('path');
 var db = require('./db');
 var passport = require('passport');
 var cookieSession = require('cookie-session');
+// var session = require('express-session');
+// var cookieParser = require('cookie-parser');
 var TwitterStrategy = require('passport-twitter').Strategy;
 
 require('dotenv').config();
@@ -15,16 +17,19 @@ app.use('/css',express.static(path.join(__dirname, '../app/css')));
 app.use('/js',express.static(path.join(__dirname, '../app/js')));
 app.use('/bower_components',express.static(path.join(__dirname, '../app/bower_components')));
 app.use('/partials',express.static(path.join(__dirname, '../app/partials')));
-app.use('/auth', authRoutes);
 
 // PASSPORT STUFF
 app.use(cookieSession({
   name: 'session',
-  keys: [process.env.SECRET_KEY]
+  secret: [process.env.SECRET_KEY],
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000
+  }
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/auth', authRoutes);
 
 passport.serializeUser(function(user, done) {
   //TODO
@@ -40,9 +45,10 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new TwitterStrategy({
   consumerKey: process.env.TWITTER_CONSUMER_KEY,
   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: "http://localhost:3000/auth/twitter/callback"
+  callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
 }, function(token, tokenSecret, profile, cb) {
-  console.log(profile);
+  console.log("PROFILE", profile);
+  debugger;
   // find or create user in DB
 }));
 

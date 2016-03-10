@@ -1,0 +1,19 @@
+.panel-primary > .panel-heading > h2 {
+  margin: 5px 0;
+  color: #FFF;
+}
+
+#btn-twitter {
+  color: #FFF;
+  background-color: #00aced;
+  border: 1px solid #009fdb;
+}
+
+#btn-twitter:hover,
+#btn-twitter:focus {
+  background-color: #0090c7;
+}
+
+.btn > .fa {
+  vertical-align: middle;
+}
